@@ -1,0 +1,11 @@
+{
+  "name": "chatbot",
+  "version": "1.0.4",
+  "description": "Pro ty co nectou dulezite",
+  "main": "bot.js",
+  "author": "Marek Brychta",
+  "dependencies": {
+    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "winston": "^3.2.1"
+  }
+}
