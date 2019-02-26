@@ -2,7 +2,9 @@ var Discord = require('discord.io');
 var Discord_js = require('discord.js');
 var logger = require('winston');
 var auth = require('./auth.json');
-var kanalID = "543507151189049357";
+var kanalID = "543507151189049357"; //original server (travian?)
+//var kanalID = "365970944243662849";
+//var kanalID = "369930010292912139"; //rene ja a rudolf
 
 // Initialize Discord Bots
 var bot_js = new Discord_js.Client();
@@ -47,6 +49,12 @@ function regularMessage() {
         "4. K zadostem o def nepouzivejte spam chat, ale prislusne sekce **perma-def** / **def-akce**!"
     })
 }
+
+//user joined the server
+bot_js.on("guildMemberAdd", function(member){
+    member.createDM().then((DMChannel) => DMChannel.send("Vitaj " + member + " na Discord serveri. Nastav si rolu(off, def, off/def) pomocou príkazu !role a meno pomocou príkazu !name .").catch(console.error));
+    bot_js.channels.get(kanalID).send("Vitaj " + member + " na Discord serveri. Nastav si rolu(off, def, off/def) pomocou príkazu !role a meno pomocou príkazu !name .");
+});
 
 //pinned messages
 function pinnedMessages(){
@@ -205,7 +213,13 @@ bot_js.on('message', message => {
         "!name \"nick\"- zmena mena, používajte bez \" \"...\n" +
         "!role \"OFF\" / \"DEFF\" / \"OFF/DEFF\"- zmena role, používajte bez \" \"...\n" +
         "!funfact - čo to asi tak môže byť...\n" + 
-        "!tabul - oznamy\n");
+        "!tabul - oznamy\n" +
+        "Pro Rythma (music bota) jsou zde následující příkazy: \n" +
+        "!play [nazev pisnicky] \n" +
+        "!skip - preskoci aktualni skladbu \n" +
+        "!queue - zobrazi frontu skladeb \n" +
+        "!search [nazev pisnicky] - vyhleda skladbu, nasledne zmacknete cislo podle moznosti nebo cancel" 
+        );
         return;
     }
 
@@ -249,6 +263,7 @@ bot_js.on('message', message => {
             return;
         }        
     }
+    
     //name change
     if (message.content.toLowerCase().substr(0,5) == "!name" && !message.member.roles.find(role => role.name === "admin")){
         var array_nick = message.content.split(" ");
@@ -289,7 +304,7 @@ bot_js.on('message', message => {
 });
 
 
-//bot_js.login("NTQ3NTA0Mzg1MDMxNDA1NTY4.D07kPg.3oF-wyGESlBwJY7jUmX2zLwZ6Mo"); //Marek - pizzovina
+//bot_js.login("NTQ3NTA0Mzg1MDMxNDA1NTY4.D1bcsQ.F60T4RMsTJUXYxoQKR__jSrxb8c"); //Marek - pizzovina
 bot_js.login("NTQ2NzUxNDE3MjYwNDQxNjUx.D1IRkA.uHH3fohtplh6Y6zsaUk05hgDJxk");
 
 
