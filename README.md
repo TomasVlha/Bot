@@ -1,4 +1,4 @@
-# DiscordBot
+# DiscordBot - testing
 
 npm install discord.js  
 npm install discord.io winston –save  
